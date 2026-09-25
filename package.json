@@ -7,7 +7,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "postinstall": "node scripts/patch-expo-constants.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",

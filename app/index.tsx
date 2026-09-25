@@ -26,6 +26,7 @@ import { PartnerInviteModal } from '../components/PartnerInviteModal';
 import { ProfileModal } from '../components/ProfileModal';
 import { StockModal } from '../components/StockModal';
 import { SummaryCard } from '../components/SummaryCard';
+import { SupabaseConnectModal } from '../components/SupabaseConnectModal';
 import { TransactionItem } from '../components/TransactionItem';
 import { WorkspaceModal } from '../components/WorkspaceModal';
 import { THEME, formatCurrency } from '../lib/constants';
@@ -75,6 +76,7 @@ export default function Index() {
   const [showPartnerInviteModal, setShowPartnerInviteModal] = useState(false);
   const [showWorkspaceModal, setShowWorkspaceModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showSupabaseModal, setShowSupabaseModal] = useState(false);
 
   // Filters
   const [filters, setFilters] = useState<FilterOptions>({
@@ -741,6 +743,17 @@ export default function Index() {
                 <Ionicons name="chevron-forward" size={18} color={THEME.colors.textDim} />
               </Pressable>
 
+              <Pressable style={styles.settingItem} onPress={() => setShowSupabaseModal(true)}>
+                <View style={styles.settingLeft}>
+                  <Ionicons name="cloud-outline" size={22} color="#3ECF8E" />
+                  <View>
+                    <Text style={styles.settingItemTitle}>Supabase Cloud Sync</Text>
+                    <Text style={styles.settingItemSub}>Connect live project & Realtime keys</Text>
+                  </View>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={THEME.colors.textDim} />
+              </Pressable>
+
               <Pressable style={styles.settingItem} onPress={handleExportReport}>
                 <View style={styles.settingLeft}>
                   <Ionicons name="document-text-outline" size={22} color={THEME.colors.info} />
@@ -794,6 +807,11 @@ export default function Index() {
       </View>
 
       {/* Modals */}
+      <SupabaseConnectModal
+        visible={showSupabaseModal}
+        onClose={() => setShowSupabaseModal(false)}
+        onConnected={loadAppData}
+      />
       <TransactionModal
         visible={showTxModal}
         onClose={() => setShowTxModal(false)}
